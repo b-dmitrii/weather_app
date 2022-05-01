@@ -1,23 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react";
+
+import { useDispatch, useSelector } from "react-redux";
+import { currentPosition, loadWeatherByLocation } from "./store/weatherSlice";
+import { WeatherPreviewBar } from "./components/WeatherPreviewBar/WeatherPreviewBar";
+import { MainContent } from "./components/MainContent/MainContent";
+
+import "./App.css";
+import { SearchNavBar } from "./components/SearchNavBar/SearchNavBar";
 
 function App() {
+  const dispatch = useDispatch();
+
+  const [searchClick, setSearchClick] = useState(false);
+  const { coord } = useSelector((state) => state.weather);
+
+  useEffect(() => {
+    dispatch(loadWeatherByLocation(coord));
+    dispatch(currentPosition(coord));
+  }, [dispatch, coord]);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {searchClick ? (
+        <SearchNavBar setSearchClick={setSearchClick} />
+      ) : (
+        <WeatherPreviewBar setSearchClick={setSearchClick} />
+      )}
+      <MainContent />
     </div>
   );
 }
