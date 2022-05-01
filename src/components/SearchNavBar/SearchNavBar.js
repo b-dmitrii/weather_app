@@ -12,7 +12,7 @@ const Container = styled.div`
   background-color: #1e213a;
   display: flex;
   flex-direction: column;
-  height: 95vh;
+  height: 80vh;
   @media (min-width: 1280px) {
     position: relative;
     padding: 82px 46px;

@@ -15,7 +15,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 95vh;
+  height: 80vh;
   @media (min-width: 1280px) {
     padding: 42px 46px;
     height: 100vh;
